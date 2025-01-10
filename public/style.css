@@ -1,0 +1,53 @@
+/*  
+*  Disables standard content-box sizing.
+*
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+/*  
+*  Removes all default margin sets the line height to meet WCAG criteria.
+*
+*/
+
+* {
+  margin: 0;
+  line-height: calc(1em + 0.5rem);
+}
+
+
+/*
+* Removes default inline display for media and fits media to its container.
+*
+*/
+
+img, picture, video, canvas, svg {
+display: block;
+max-width: 100%;
+}
+
+/*
+* Form controls will use parent's font.
+*
+*/
+
+input, button, textarea, select {
+font: inherit;
+}
+
+/*
+* Allows paragraphs to break words and add hyphens were necessary.
+*
+*/
+
+p {
+overflow-wrap: break-word;
+hyphens: auto;
+}
+
+h1 {
+  text-align: center;
+}
