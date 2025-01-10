@@ -16,6 +16,7 @@ const SQL = `
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     author_id INTEGER NOT NULL,
     message TEXT NOT NULL,
+    date_added DATE NOT NULL,
     FOREIGN KEY(author_id) REFERENCES users(id)
   );
 
