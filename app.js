@@ -7,7 +7,8 @@ app.use(express.urlencoded({extended: true}));
 
 
 //asset path
-const assetsPath = path.join()
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
 
 //view engine
 app.set("views", path.join(__dirname, "views"));
