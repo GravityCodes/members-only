@@ -31,7 +31,7 @@ const validateUser = [
 ]
 
 const homeGet = (req, res) => {
-    res.render("index", {user: req.user});
+    res.render("index", {user: req.user, messages: []});
   };
 
 const logInGet = (req, res) => {
