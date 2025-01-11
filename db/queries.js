@@ -18,4 +18,28 @@ class User {
     }
 }
 
+class Messages {
+    async getAllMessages(){
+        const query = `
+            SELECT *, u.author_name
+            FROM messages AS m
+            LEFT JOIN users AS u
+            WHERE m.author_id == u.id;
+        `
+        const {rows} = await pool.query(query);
+        const messages = rows;
+
+        return messages;
+    }
+
+    async insertMessage(params){
+        const query = `
+            INSERT INTO messages(author_id, message, date_added)
+            VALUES($1, $2, $3);
+        `
+        await pool.query(query, [params.author_id, params.message, params.date_added]);
+    }
+}
+
 module.exports = new User();
+module.exports = new Messages();
