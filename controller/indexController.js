@@ -2,6 +2,9 @@ const userDb = require("../db/queries");
 const bcrypt = require("bcryptjs");
 
 const homeGet = (req, res) => {
+    console.log(req.session);
+    console.log(req.session.id);
+    req.session.visited = true;
     res.render("index");
   };
 
