@@ -1,12 +1,14 @@
 require("dotenv").config();
-const express = require("express");
 const path = require("path");
-const session = require("express-session");
-const indexRouter = require("./routes/indexRouter");
-const app = express();
-const pgStore = require("connect-pg-simple")(session);
 const pool = require("./db/pool");
-app.use(express.urlencoded({extended: true}));
+const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
+const app = express();
+const indexRouter = require("./routes/indexRouter");
+const pgStore = require("connect-pg-simple")(session);
+require("./config/passport");
+
 
 
 
@@ -29,7 +31,9 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 864 * 100 // 1 day
     }
-}))
+}));
+app.use(express.urlencoded({extended: true}));
+app.use(passport.session());
 
 //routers
 app.use("/", indexRouter);

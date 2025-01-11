@@ -2,15 +2,13 @@ const userDb = require("../db/queries");
 const bcrypt = require("bcryptjs");
 
 const homeGet = (req, res) => {
-    console.log(req.session);
-    console.log(req.session.id);
-    req.session.visited = true;
-    res.render("index");
+    res.render("index", {user: req.user});
   };
 
 const logInGet = (req, res) => {
   res.render("log-in");
 }
+
 
 const signUpGet = (req, res) => {
   res.render("sign-up");
@@ -26,9 +24,19 @@ const signUpPost = async (req, res) => {
   res.render("log-in");
 }
 
+const userLogOutPost = (req, res, next) => {
+  req.logout((err) => {
+    if(err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+} 
+
 module.exports = {
   homeGet,
   logInGet,
   signUpGet,
-  signUpPost
+  signUpPost,
+  userLogOutPost
 }

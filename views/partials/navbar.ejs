@@ -3,11 +3,20 @@
     <div class="logo nav-link">Members Only</div>
   </div>
   <div class="nav-right">
-    <div class="nav-link">
-        <a href="/sign-up">Sign up</a>
-    </div>
-    <div class="nav-link">
-        <a href="/log-in">Log in</a>
-    </div>
+    <% if(locals.user) { %>
+        <div class="nav-link">
+          <a href="/add-message">Add Message</a>
+        </div>
+        <div class="nav-link">
+          <a href="/log-out">Log out</a>
+        </div>
+    <%  } else { %>
+        <div class="nav-link">
+            <a href="/sign-up">Sign up</a>
+        </div>
+        <div class="nav-link">
+            <a href="/log-in">Log in</a>
+        </div>
+    <% } %>
   </div>
 </nav>
