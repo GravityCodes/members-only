@@ -40,6 +40,10 @@ class Messages {
         await pool.query(query, [params.author_id, params.message, params.date_added]);
     }
 }
+const userDb = new User();
+const messageDb = new Messages();
 
-module.exports = new User();
-module.exports = new Messages();
+module.exports = {
+    userDb,
+    messageDb
+}
