@@ -8,6 +8,14 @@ class User {
         `
         await pool.query(query, [params.firstname, params.lastname, params.username, params.password, false]);
     }
+    async getUser(user){
+        const query = `
+        SELECT * FROM users WHERE username = $1;
+        `
+        const {rows} = await pool.query(query, [user]);
+        const username = rows[0];
+        return username;
+    }
 }
 
 module.exports = new User();
