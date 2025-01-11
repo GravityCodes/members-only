@@ -16,15 +16,29 @@ class User {
         const username = rows[0];
         return username;
     }
+
+    async becomeMember(id){
+        try {
+        const query=`
+            UPDATE users
+            SET member_status = true
+            WHERE id = $1;
+        `
+        await pool.query(query, [id]);
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }
 
 class Messages {
     async getAllMessages(){
         const query = `
-            SELECT *, u.author_name
+            SELECT m.message, m.date_added,  u.username AS author_name
             FROM messages AS m
             LEFT JOIN users AS u
-            WHERE m.author_id == u.id;
+            ON m.author_id = u.id;
         `
         const {rows} = await pool.query(query);
         const messages = rows;

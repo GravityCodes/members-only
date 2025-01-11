@@ -11,6 +11,14 @@ indexRouter.get("/log-in", indexController.logInGet);
 indexRouter.post("/log-in", passport.authenticate('local', { successRedirect: "/",
   failureRedirect: "/log-in"}));
 
+indexRouter.get("/add-message", indexController.addMessageGet);
+indexRouter.post("/add-message", indexController.addMessagePost);
+
+
+
+indexRouter.get("/become-member", indexController.becomeMemberGet);
+indexRouter.post("/become-member", indexController.becomeMemberPost);
+
 indexRouter.get("/log-out", indexController.userLogOutPost);
 
 module.exports = indexRouter;

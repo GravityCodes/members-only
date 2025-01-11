@@ -1,4 +1,4 @@
-const {userDb} = require("../db/queries");
+const {userDb, messageDb} = require("../db/queries");
 const bcrypt = require("bcryptjs");
 const {body , validationResult} = require("express-validator");
 
@@ -28,10 +28,17 @@ const validateUser = [
     return value === req.body.password;
   })
   .withMessage("Password do not match.")
-]
+];
 
-const homeGet = (req, res) => {
-    res.render("index", {user: req.user, messages: []});
+const validateMember = [
+  body("secret")
+  .matches(/\b(?:name|Name)\b/)
+  .withMessage("Hint: What is that which belongs to you But others use it more than you do?")
+];
+
+const homeGet = async (req, res) => {
+    req.messages = await messageDb.getAllMessages();
+    res.render("index", {user: req.user, messages: req.messages});
   };
 
 const logInGet = (req, res) => {
@@ -55,7 +62,7 @@ const signUpPost = [ validateUser, async (req, res) => {
     await userDb.insertUser({...req.body, password: hash});
   });
   res.render("log-in");
-}]
+}];
 
 const userLogOutPost = (req, res, next) => {
   req.logout((err) => {
@@ -66,10 +73,49 @@ const userLogOutPost = (req, res, next) => {
   });
 } 
 
+const addMessageGet = (req, res) => {
+  res.render("add-message");
+}
+
+const addMessagePost = async (req, res) => {
+  try {
+
+  await messageDb.insertMessage({author_id: req.user.id, message: req.body.message, date_added: new Date()});
+  res.redirect("/");
+
+  } catch(err){
+    throw err;
+  }
+  
+}
+
+const becomeMemberGet = (req, res) => {
+  res.render("become-member");
+}
+
+const becomeMemberPost = [
+  validateMember,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+      return res.status(400).render("become-member", {errors: errors.array()});
+    }
+    
+    await userDb.becomeMember();
+    res.status(200).redirect("/", {becameMember : true});
+  }
+
+
+]
+
 module.exports = {
   homeGet,
   logInGet,
   signUpGet,
   signUpPost,
-  userLogOutPost
+  userLogOutPost,
+  addMessageGet,
+  addMessagePost,
+  becomeMemberGet,
+  becomeMemberPost
 }
