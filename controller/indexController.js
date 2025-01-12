@@ -78,7 +78,11 @@ const userLogOutPost = (req, res, next) => {
 } 
 
 const addMessageGet = (req, res) => {
-  res.render("add-message");
+  if(req.isAuthenticated()){
+    res.render("add-message");
+  } else {
+    res.render("auth-error");
+  }
 }
 
 const addMessagePost = async (req, res) => {
@@ -103,7 +107,12 @@ const deleteMessagePost = async (req, res) => {
 }
 
 const becomeMemberGet = (req, res) => {
-  res.render("become-member");
+  if(req.isAuthenticated()){
+    res.render("become-member");
+  } else {
+    res.render("auth-error");
+  }
+  
 }
 
 const becomeMemberPost = [
@@ -123,6 +132,11 @@ const becomeMemberPost = [
 
 ]
 
+
+const unknownPageGet = (req, res) => {
+  res.status(404).render("404");
+}
+
 module.exports = {
   homeGet,
   logInGet,
@@ -133,5 +147,6 @@ module.exports = {
   addMessagePost,
   deleteMessagePost,
   becomeMemberGet,
-  becomeMemberPost
+  becomeMemberPost,
+  unknownPageGet
 }

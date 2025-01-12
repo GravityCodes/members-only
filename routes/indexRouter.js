@@ -20,4 +20,6 @@ indexRouter.post("/become-member", indexController.becomeMemberPost);
 
 indexRouter.get("/log-out", indexController.userLogOutPost);
 
+indexRouter.get("*", indexController.unknownPageGet);
+
 module.exports = indexRouter;
