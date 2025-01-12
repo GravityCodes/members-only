@@ -1,7 +1,7 @@
 const {userDb, messageDb} = require("../db/queries");
 const bcrypt = require("bcryptjs");
 const {body , validationResult} = require("express-validator");
-
+const { format } = require("date-fns");
 
 const validateUser = [
   body("firstname")
@@ -38,7 +38,8 @@ const validateMember = [
 
 const homeGet = async (req, res) => {
     req.messages = await messageDb.getAllMessages();
-    res.render("index", {user: req.user, messages: req.messages});
+    const formatMessages = req.messages.map(message => ({...message, date_added : format(message.date_added, "MM/dd/yyyy") }));
+    res.render("index", {user: req.user, messages: formatMessages});
   };
 
 const logInGet = (req, res) => {

@@ -18,12 +18,15 @@
           </p>
         </div>
         <div class="details">
+          <% if(locals.user && locals.user.is_admin == true) { %>
+            <a href="/delete" class="text-red-400 rounded-md hover:text-red-700">Remove Message</a>
+          <% } %>
           <% if(locals.user && locals.user.member_status == true) { %>
             <div class="text-sm text-violet-600"><%= message.author_name%></div>
             <div class="text-sm text-violet-600"><%= message.date_added %></div>
           <% } else { %>
             <div class="text-sm text-violet-600">Anonymous</div>
-            <div class="text-sm text-violet-600">Unknown</div>
+            <div class="text-sm text-violet-600">Date Hidden</div>
           <% } %>
         </div>
       </div>
