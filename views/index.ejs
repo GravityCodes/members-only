@@ -19,7 +19,7 @@
           </p>
         </div>
         <div class="details">
-          <% if(locals.user && +locals.user.member_status == true) { %>
+          <% if(locals.user && locals.user.member_status == true) { %>
             <div class="message-author"><%= message.author_name%></div>
             <div class="message-date"><%= message.date_added %></div>
           <% } else { %>
