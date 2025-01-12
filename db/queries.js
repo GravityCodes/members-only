@@ -38,7 +38,8 @@ class Messages {
             SELECT m.message, m.date_added,  u.username AS author_name
             FROM messages AS m
             LEFT JOIN users AS u
-            ON m.author_id = u.id;
+            ON m.author_id = u.id
+            ORDER BY m.date_added DESC;
         `
         const {rows} = await pool.query(query);
         const messages = rows;

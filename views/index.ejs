@@ -7,24 +7,23 @@
   <link rel="stylesheet" href="/nav.css">
   <title>Members Only</title>
 </head>
-<body>
+<body class="bg-violet-50">
   <%- include("./partials/navbar.ejs") %>
-  <h1>Members Only Messaging Board</h1>
-  <div class="messages-container">
+  <div class="flex flex-col items-center my-0 mx-auto p-3 ">
     <% messages.length != 0 && messages.map(message => { %>
-      <div class="message">
-        <div class="message-wrapper">
+      <div class="bg-white w-1/2 p-3">
+        <div class="text-slate-950 text-lg">
           <p>
             <%= message.message %>
           </p>
         </div>
         <div class="details">
           <% if(locals.user && locals.user.member_status == true) { %>
-            <div class="message-author"><%= message.author_name%></div>
-            <div class="message-date"><%= message.date_added %></div>
+            <div class="text-sm text-violet-600"><%= message.author_name%></div>
+            <div class="text-sm text-violet-600"><%= message.date_added %></div>
           <% } else { %>
-            <div class="message-author">Anonymous</div>
-            <div class="message-date">Unknown</div>
+            <div class="text-sm text-violet-600">Anonymous</div>
+            <div class="text-sm text-violet-600">Unknown</div>
           <% } %>
         </div>
       </div>
