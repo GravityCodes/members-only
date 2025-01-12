@@ -13,7 +13,7 @@ indexRouter.post("/log-in", passport.authenticate('local', { successRedirect: "/
 indexRouter.get("/add-message", indexController.addMessageGet);
 indexRouter.post("/add-message", indexController.addMessagePost);
 
-
+indexRouter.get("/delete/:id", indexController.deleteMessagePost);
 
 indexRouter.get("/become-member", indexController.becomeMemberGet);
 indexRouter.post("/become-member", indexController.becomeMemberPost);

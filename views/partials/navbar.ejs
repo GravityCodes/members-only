@@ -1,6 +1,6 @@
 <nav class="bg-violet-300 shadow-md shadow-gray-300 text-white ">
   <div class="nav-left">
-    <div class="text-xl hover:text-violet-200 cursor-pointer">Members Only</div>
+    <div class="text-2xl hover:text-violet-200 cursor-pointer">Members Only</div>
   </div>
   <div class="nav-right">
     <% if(locals.user) { %>
@@ -16,10 +16,10 @@
           <a href="/log-out">Log out</a>
         </div>
     <%  } else { %>
-        <div class=" text-lg bg-violet-400 p-2 rounded-md hover:text-violet-200">
+        <div class=" text-lg bg-pink-500 p-2 rounded-md hover:text-violet-200">
             <a href="/sign-up">Sign up</a>
         </div>
-        <div class=" text-lg bg-violet-400 p-2 rounded-md hover:text-violet-200">
+        <div class=" text-lg bg-emerald-500 p-2 rounded-md hover:text-emerald-200">
             <a href="/log-in">Log in</a>
         </div>
     <% } %>

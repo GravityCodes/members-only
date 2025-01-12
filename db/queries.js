@@ -35,7 +35,7 @@ class User {
 class Messages {
     async getAllMessages(){
         const query = `
-            SELECT m.message, m.date_added,  u.username AS author_name
+            SELECT m.id, m.message, m.date_added,  u.username AS author_name
             FROM messages AS m
             LEFT JOIN users AS u
             ON m.author_id = u.id
@@ -53,6 +53,14 @@ class Messages {
             VALUES($1, $2, $3);
         `
         await pool.query(query, [params.author_id, params.message, params.date_added]);
+    }
+
+    async deleteMessage(id) {
+        const query = `
+            DELETE FROM messages
+            WHERE id = $1
+        `
+        await pool.query(query, [id]);
     }
 }
 const userDb = new User();

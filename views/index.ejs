@@ -9,9 +9,14 @@
 </head>
 <body class="bg-violet-50">
   <%- include("./partials/navbar.ejs") %>
+  <% if(!locals.user) { %>
+    <div class="text-center bg-yellow-200">
+      <p class="text-yellow-900 p-2">Sign up or log in to send a message.</p>
+    </div>
+  <% } %>
   <div class="flex flex-col items-center my-0 mx-auto p-3 ">
     <% messages.length != 0 && messages.map(message => { %>
-      <div class="bg-white w-1/2 p-3">
+      <div class="bg-white w-1/2 p-3 ">
         <div class="text-slate-950 text-lg">
           <p>
             <%= message.message %>
@@ -19,7 +24,7 @@
         </div>
         <div class="details">
           <% if(locals.user && locals.user.is_admin == true) { %>
-            <a href="/delete" class="text-red-400 rounded-md hover:text-red-700">Remove Message</a>
+            <a href="<%= `delete/${message.id}` %>" class="text-red-400 rounded-md hover:text-red-700">Remove Message</a>
           <% } %>
           <% if(locals.user && locals.user.member_status == true) { %>
             <div class="text-sm text-violet-600"><%= message.author_name%></div>

@@ -93,6 +93,15 @@ const addMessagePost = async (req, res) => {
   
 }
 
+const deleteMessagePost = async (req, res) => {
+  try {
+    await messageDb.deleteMessage(req.params.id);
+    res.redirect("/");
+  } catch(err){
+    throw err;
+  }
+}
+
 const becomeMemberGet = (req, res) => {
   res.render("become-member");
 }
@@ -108,7 +117,7 @@ const becomeMemberPost = [
     }
     
     await userDb.becomeMember(req.user.id);
-    res.status(200).render("index", {user: req.user, messages: req.messages, becameMember : true});
+    res.redirect("/");
   }
 
 
@@ -122,6 +131,7 @@ module.exports = {
   userLogOutPost,
   addMessageGet,
   addMessagePost,
+  deleteMessagePost,
   becomeMemberGet,
   becomeMemberPost
 }
