@@ -1,8 +1,7 @@
-<!-- views/partials/errors.ejs -->
 <% if (locals.errors) {%>
-  <ul>
+  <ul class="flex flex-col items-center p-10 gap-y-2">
     <% errors.forEach(function(error) { %>
-      <li><%= error.msg %></li>
+      <li class="bg-red-200 p-2 border border-red-500 rounded-md w-2/5"><%= error.msg %></li>
     <% }); %>
   </ul>
 <% } %>

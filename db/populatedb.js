@@ -9,7 +9,8 @@ const SQL = `
     lastname TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
-    member_status BOOLEAN
+    member_status BOOLEAN,
+    is_Admin BOOLEAN 
   );
 
   CREATE TABLE IF NOT EXISTS messages(

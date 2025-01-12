@@ -19,7 +19,7 @@ const validateUser = [
     const user = await userDb.getUser(value);
     
     if(user){
-      throw new Error("username already taken");
+      throw new Error("Username already taken");
     }
     return true;
   }),
@@ -42,9 +42,12 @@ const homeGet = async (req, res) => {
   };
 
 const logInGet = (req, res) => {
+  
+  if(req.session.messages) {
+    return res.render("log-in", {errors: [{ msg: req.session.messages[0]}]});
+  }
   res.render("log-in");
 }
-
 
 const signUpGet = (req, res) => {
   res.render("sign-up");
