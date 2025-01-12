@@ -97,12 +97,14 @@ const becomeMemberPost = [
   validateMember,
   async (req, res) => {
     const errors = validationResult(req);
+    req.messages = await messageDb.getAllMessages();
     if(!errors.isEmpty()){
+     
       return res.status(400).render("become-member", {errors: errors.array()});
     }
     
-    await userDb.becomeMember();
-    res.status(200).redirect("/", {becameMember : true});
+    await userDb.becomeMember(req.user.id);
+    res.status(200).render("index", {user: req.user, messages: req.messages, becameMember : true});
   }
 
 

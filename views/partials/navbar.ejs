@@ -4,9 +4,11 @@
   </div>
   <div class="nav-right">
     <% if(locals.user) { %>
+      <% if(locals.user.member_status == false) { %>
       <div class="nav-link">
         <a href="/become-member">Become a member</a>
       </div>
+      <% } %>
         <div class="nav-link">
           <a href="/add-message">Add Message</a>
         </div>

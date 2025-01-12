@@ -19,8 +19,13 @@
           </p>
         </div>
         <div class="details">
-          <div class="message-author"><%= message.author_name%></div>
-          <div class="message-date"><%= message.date_added %></div>
+          <% if(locals.user && +locals.user.member_status == true) { %>
+            <div class="message-author"><%= message.author_name%></div>
+            <div class="message-date"><%= message.date_added %></div>
+          <% } else { %>
+            <div class="message-author">Anonymous</div>
+            <div class="message-date">Unknown</div>
+          <% } %>
         </div>
       </div>
     <% }) %>
